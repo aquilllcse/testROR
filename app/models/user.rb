@@ -1,5 +1,6 @@
 class User<ApplicationRecord
     belongs_to :role
+    has_many :conference_rooms
     before_save {self.email = email.downcase}
     validates :user_name, presence: true, length: {minimum:2},
               format: {with: /^[a-zA-Z ]*$/, multiline: true}

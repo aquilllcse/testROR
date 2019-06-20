@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190620093328) do
+ActiveRecord::Schema.define(version: 20190620101807) do
 
   create_table "conference_rooms", force: :cascade do |t|
     t.integer "room_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "user_id"
   end
 
   create_table "roles", force: :cascade do |t|
