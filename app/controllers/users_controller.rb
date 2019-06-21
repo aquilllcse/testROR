@@ -10,9 +10,11 @@ class UsersController < ApplicationController
         # @user.role = Role.last
         if @user.save
             flash[:notice] = "User was successfully created"
-            redirect_to user_path(@user)
+            # redirect_to user_path(@user) TODO will uncomment once show page is avialable
+            redirect_to new_user_role_path(role_param[:role_id])
         else
-            render "new"
+            flash[:notice] = @user.errors
+            redirect_to new_user_role_path(role_param[:role_id])
         end
     end
 
