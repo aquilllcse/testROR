@@ -1,0 +1,7 @@
+<%= form_for @role do |f|%>
+    <p>
+        <%= f.label :Select_Role%></br>
+        <%= f.select :name, Role.new.giver%>
+    </p>
+    <%= f.submit%>
+<%end%>
