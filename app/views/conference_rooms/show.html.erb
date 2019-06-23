@@ -1,12 +1,16 @@
-<h1> This is your booked room </h1>
+<h1> booked room history</h1>
 <p>
-    <%= @room.room_number%>
+    <h4>Room number: <%= @room.room_number%></h4>
 </p>
 
 <p>
-    <%= @room.user.user_name%>
+    <h4>User name: <%= @room.user.user_name%></h4>
 </p>
 
 <p>
-    <%= @room.user.role.name%>
+    <h4>User email: <%= @room.user.email%></h4>
+</p>
+
+<p>
+    <h4>Booked By: <%= @room.user.role.name%></h4>
 </p>
