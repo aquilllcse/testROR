@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root "welcome#home"
   resources :roles
   resources :users
+  resources :conference_rooms
 
   get 'roles/:role_id/users/new', to: 'users#new', as: 'new_user_role'
+  get "users/:user_id/conference_rooms/new", to: "conference_rooms#new", as: "new_user_role_room"
 end

@@ -1,0 +1,22 @@
+<h1> welcome to book rooms for respective users</h1>
+<% if @room.errors.any?%>
+    <h1>following created error</h1>
+    <%@room.errors.full_messages.each do |msg|%>
+    <ul>
+        <li><%=msg%></li>
+    </ul>
+    <%end%>
+<%end%>
+<%= form_for @room do |u|%>
+    <p>
+        <%= u.label :room_number%></br>
+        <%= u.text_field :room_number%></br>
+    </p>
+    
+    <p>
+        <%= u.hidden_field :user_id, value: params[:user_id] %>
+    </p>
+    <p>
+        <%= u.submit%>
+    </p>
+<%end%>
