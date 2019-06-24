@@ -10,4 +10,15 @@ class UserMailer < ApplicationMailer
     # mail (to:  @room.user.email, subject: "")
     mail(to: @room.user.email, subject: 'Room booking confirmation')
   end
+
+  def updation
+    @room = params[:conference_room]
+    # mail (to:  @room.user.email, subject: "")
+    mail(to: @room.user.email, subject: 'Room booking updatiom')
+  end
+
+  def deletion
+    @room = params[:conference_room]
+    mail(to: @room.user.email, subject: 'Room booking cancelled')
+  end
 end

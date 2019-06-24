@@ -1,5 +1,7 @@
 class ConferenceRoomsController < ApplicationController
     
+    before_action :find_room, only: [:update, :show, :destroy]
+
     def index
         @rooms = ConferenceRoom.all
     end
@@ -9,17 +11,29 @@ class ConferenceRoomsController < ApplicationController
     end
 
     def edit
-        @room = ConferenceRoom.find(params[:user_id])
+        @room = ConferenceRoom.find_by(params[:user_id])
     end
 
     def update
-        @room = ConferenceRoom.find(params[:id])
+        #@room = ConferenceRoom.find(params[:id])
         if @room.update(role_param) && auth(@room)
+            UserMailer.with(conference_room: @room).updation.deliver
             flash[:notice] = "Room successfully edited"
             redirect_to conference_room_path(@room)
         else
             # render plain: "Only admin can edit or delete rooms"
             render "edit"
+        end
+    end
+
+    def destroy
+        #@room = ConferenceRoom.find(params[:id])
+        if auth(@room)
+            UserMailer.with(conference_room: @room).deletion.deliver
+            @room.destroy
+            redirect_to conference_rooms_path
+        else
+            render plain:"Only Admin can delete"
         end
     end
 
@@ -35,10 +49,13 @@ class ConferenceRoomsController < ApplicationController
     end
 
     def show
-        @room = ConferenceRoom.find(params[:id])
+        #@room = ConferenceRoom.find(params[:id])
     end
 
     private
+        def find_room
+            @room = ConferenceRoom.find(params[:id])
+        end
         def role_param
             params.require(:conference_room).permit(:room_number, :user_id)
         end
