@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   get 'roles/:role_id/users/new', to: 'users#new', as: 'new_user_role'
   get "users/:user_id/conference_rooms/new", to: "conference_rooms#new", as: "new_user_role_room"
+  get "users/:user_id/conference_rooms/edit", to: "conference_rooms#edit", as: "edit_user_role_room"
 end

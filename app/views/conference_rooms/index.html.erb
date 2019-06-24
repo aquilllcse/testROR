@@ -1,0 +1,11 @@
+<ul>
+    <% @rooms.each do |room|%>
+        <p>
+            <li>Room no.: <%=room.room_number%></li>
+            <li>User: <%=room.user.user_name%></li>
+            <li>email: <%=room.user.email%></li>
+            <li>Booked by: <%=room.user.role.name%></li>
+            <li><%=link_to "Edit", edit_user_role_room_path(room.id)%></li>
+        </p>
+    <%end%>
+</ul>
