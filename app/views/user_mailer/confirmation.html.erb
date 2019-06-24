@@ -1,0 +1,7 @@
+<h1> following are the details of your booked room</h1>
+<ul>
+  <li><h4>Room number: <%= @room.room_number%></h4></li>
+  <li><h4>User name: <%= @room.user.user_name%></h4></li>
+  <li><h4>User email: <%= @room.user.email%></h4></li>
+  <li><h4>Booked By: <%= @room.user.role.name%></h4></li>
+</ul>
