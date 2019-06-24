@@ -6,6 +6,7 @@ class ConferenceRoomsController < ApplicationController
     def create
         @room = ConferenceRoom.new(role_param)
         if @room.save
+            UserMailer.with(conference_room: @room).confirmation.deliver
             flash[:notice] = "Room was booked Successfully"
             redirect_to conference_room_path(@room)
         else
