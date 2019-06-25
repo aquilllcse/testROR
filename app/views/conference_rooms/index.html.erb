@@ -6,8 +6,13 @@
       <li>email: <%=room.user.email%></li>
       <li>Booked by: <%=room.user.role.name%></li>
       <li>booked <%=time_ago_in_words(room.created_at)%> ago</li>
-      <li><%=link_to "Edit", edit_user_role_room_path(room.user.id)%> 
-      | <%=link_to "Delete", conference_room_path(room), method: :delete, data: {confirm: "Are you sure"}%></li>
+      <!--<li><%=link_to "Edit", edit_user_role_room_path(room.user.id)%> |
+      <%=link_to "Delete", conference_room_path(room), method: :delete, data: {confirm: "Are you sure"}%></li>-->
+      <li><%=link_to "Modify", conference_room_path(room)%>
     </p>
   <%end%>
 </ul>
+
+      
+
+      

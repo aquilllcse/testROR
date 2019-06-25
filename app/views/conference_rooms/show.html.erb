@@ -15,4 +15,12 @@
   <h4>Booked By: <%= @room.user.role.name%></h4>
 </p>
 
-<%=link_to "Back", conference_rooms_path%>
+<%=link_to "Booked Rooms", conference_rooms_path%>
+<p>
+  <% if can? :update, @room %>
+    <%=link_to "Edit", edit_user_role_room_path(@room.user.id)%> |
+  <%end%>
+  <% if can? :update, @room %>
+    <%=link_to "Delete", conference_room_path(@room), method: :delete, data: {confirm: "Are you sure"}%>
+  <%end%>
+</p>
