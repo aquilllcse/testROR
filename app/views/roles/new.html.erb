@@ -1,7 +1,7 @@
 <%= form_for @role do |f|%>
-    <p>
-        <%= f.label :Select_Role%></br>
-        <%= f.select :name, Role.new.available_role%>
-    </p>
-    <%= f.submit%>
+  <p>
+    <%= f.label :Select_Role%></br>
+    <%= f.select :name, Role.new.available_role%>
+  </p>
+  <%= f.submit%>
 <%end%>
