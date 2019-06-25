@@ -16,19 +16,19 @@ class ConferenceRoomsController < ApplicationController
 
     def update
         #@room = ConferenceRoom.find(params[:id])
-        if @room.update(role_param) && auth(@room)
+        if @room.update(role_param) && authenticate_role(@room)
             UserMailer.with(conference_room: @room).updation.deliver
             flash[:notice] = "Room successfully edited"
             redirect_to conference_room_path(@room)
         else
             # render plain: "Only admin can edit or delete rooms"
-            render "edit"
+            redirect_to edit_user_role_room_path(@room.user.id)
         end
     end
 
     def destroy
         #@room = ConferenceRoom.find(params[:id])
-        if auth(@room)
+        if authenticate_role(@room)
             UserMailer.with(conference_room: @room).deletion.deliver
             @room.destroy
             redirect_to conference_rooms_path
@@ -44,13 +44,11 @@ class ConferenceRoomsController < ApplicationController
             flash[:notice] = "Room was booked Successfully"
             redirect_to conference_room_path(@room)
         else
-            render "new"
+            redirect_to edit_user_role_room_path(@room.user.id)
         end
     end
 
-    def show
-        #@room = ConferenceRoom.find(params[:id])
-    end
+    def show ; end
 
     private
         def find_room
@@ -60,7 +58,7 @@ class ConferenceRoomsController < ApplicationController
             params.require(:conference_room).permit(:room_number, :user_id)
         end
 
-        def auth(room)
+        def authenticate_role(room)
             if(room.user.role.name.downcase == "ADMIN".downcase)
                 return true
             else
